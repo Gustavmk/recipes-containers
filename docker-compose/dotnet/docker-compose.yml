@@ -1,0 +1,40 @@
+# docker-compose up -d
+# docker-compose down
+
+
+version: "3.6"
+networks:
+  localdev:
+    name: localdev
+
+services:
+  db-server:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: db-server
+    ports:
+      - "1433:1433"
+    networks:
+      - localdev
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'myHardCoreDevDb123@'
+      MSSQL_PID: 'Developer'
+      MSSQL_TCP_PORT: 1433 
+    volumes:
+      - sqlvolume:/var/opt/mssql
+      #- sqlvolume:/var/opt/mssql/data
+      #- sqlvolume:/var/opt/mssql/log
+      #- sqlvolume:/var/opt/mssql/secrets
+
+  dotnet-webapi:
+    build:
+      context: .
+      dockerfile: src/dotnet-api/Dockerfile 
+    container_name: dotnet-webapi
+    depends_on:
+      - db-server
+    networks:
+      - localdev
+
+volumes:
+  sqlvolume:
