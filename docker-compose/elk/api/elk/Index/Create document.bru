@@ -1,0 +1,18 @@
+meta {
+  name: Create document
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/infra_nginx/_doc
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "server_name": "lb-example",
+    "uri": "test"
+  }
+}

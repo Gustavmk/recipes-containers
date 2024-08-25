@@ -1,0 +1,11 @@
+meta {
+  name: GET Cluster Heatlh
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/_cluster/health
+  body: none
+  auth: none
+}
