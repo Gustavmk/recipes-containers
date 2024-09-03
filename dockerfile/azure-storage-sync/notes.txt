@@ -23,3 +23,12 @@ docker run --security-opt="seccomp:unconfined" -it yt-blobsync:latest
 
 Just run non interactive
 docker run --security-opt="seccomp:unconfined" yt-blobsync:latest
+
+
+
+# My Example
+
+docker build -t example-blob-sync:v2 -f example.dockerfile .   
+docker login name_of_acr.azurecr.io
+docker image tag example-blob-sync:v3 name_of_acr.azurecr.io/cloud/example-blob-sync:v3
+docker image push name_of_acr.azurecr.io/cloud/example-blob-sync:v3
