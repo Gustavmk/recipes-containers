@@ -1,0 +1,6 @@
+FROM opensearchproject/opensearch:latest
+RUN /usr/share/opensearch/bin/opensearch-plugin remove opensearch-security
+# Set environment variable for single-node discovery
+ENV discovery.type=single-node
+# Expose the necessary ports
+EXPOSE 9200 9600
