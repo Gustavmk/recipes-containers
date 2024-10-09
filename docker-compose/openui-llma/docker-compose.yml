@@ -10,15 +10,12 @@ services:
     ports:
       - "11434:11434"
     restart: always
+    runtime: nvidia
     networks:
       - netllm
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -29,15 +26,13 @@ services:
       USE_CUDA_DOCKER: "true"
       USE_OLLAMA_DOCKER: "true"
       OLLAMA_BASE_URL: "http://ollama:11434"
-      NVIDIA_VISIBLE_DEVICES: "all"
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
     volumes:
       - open-webui:/app/backend/data
       - /dev/nvidia-caps:/dev/nvidia-caps
       - /dev/nvidia0:/dev/nvidia0
       - /dev/nvidiactl:/dev/nvidiactl
-      - /dev/nvidia-modeset:/dev/nvidia-modeset
-      - /dev/nvidia-uvm:/dev/nvidia-uvm
-      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools
     ports:
       - "3000:8080"
     extra_hosts:
@@ -45,13 +40,7 @@ services:
     restart: always
     networks:
       - netllm
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+
 volumes:
   ollama:
   open-webui:
