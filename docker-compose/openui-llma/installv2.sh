@@ -1,6 +1,6 @@
 # after install extension
 
-apt install nvidia-cuda-toolkit
+apt update && apt install nvidia-cuda-toolkit -y 
 sudo reboot
 
 # check with 
