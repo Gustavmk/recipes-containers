@@ -1,0 +1,21 @@
+[wsl2]
+guiApplications=false
+
+# Sets the VM to use two virtual processors
+processors=2
+# Limits VM memory to use no more than defined
+memory=8GB
+
+localhostForwarding=true
+
+safeMode=false
+
+# SWAP
+swap=2GB
+#swapFile=%USERPROFILE%\AppData\Local\Temp\swap.vhdx
+
+# Turns on output console showing contents of dmesg when opening a WSL 2 distro for debugging
+debugConsole=false
+
+# For more
+#https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig
