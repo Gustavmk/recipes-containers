@@ -28,7 +28,7 @@ DESTINATION_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=$desti
 
 
 echo "performing AZCOPY sync for each container"
-log_name='log5'
+log_name='log-10022025-1425.txt'
 for blob_container in $(cat src.txt);
 #for blob_container in $(cat reshop-blobs-essenciais.txt);
    do
